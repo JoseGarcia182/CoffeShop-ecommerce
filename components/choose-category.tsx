@@ -3,10 +3,11 @@
 import { useGetCategories } from "@/api/getProducts"
 import { CategoryType } from "@/types/category";
 import { ResponseType } from "@/types/response";
+import Image from "next/image";
 import Link from "next/link";
 
 const ChooseCategory = () => {
-    const {result, loading, error}: ResponseType = useGetCategories();
+    const {result, loading}: ResponseType = useGetCategories();
 
     return ( 
         <div className="max-w-6xl py-4 mx-auto sm:py-16 sm:px-24">

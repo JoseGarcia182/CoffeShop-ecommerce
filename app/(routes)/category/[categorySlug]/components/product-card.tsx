@@ -4,10 +4,9 @@ import { Expand, ShoppingCart } from "lucide-react";
 import { ProductType } from "@/types/product";
 import { formatPrice } from "@/lib/formatPrice";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import ProductTasteOrigin from "@/components/shared/product-taste-origin";
 import { useCart } from "@/hooks/use-cart";
-import ProductImage from "@/components/shared/product-image";
+import Image from "next/image";
 
 type ProductCardProps = {
   product: ProductType;

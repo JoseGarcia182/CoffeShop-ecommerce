@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-  const { items, removeAll } = useCart();
+  const { items } = useCart();
   const prices = items.map((product) => product.price);
   const totalPrice = prices.reduce((total, price) => total + price, 0);
 

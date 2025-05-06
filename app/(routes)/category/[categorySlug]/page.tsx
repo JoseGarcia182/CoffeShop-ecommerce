@@ -13,7 +13,7 @@ import { useState } from "react";
 export default function Page() {
   const params = useParams();
   const categorySlug = typeof params?.categorySlug === 'string' ? params.categorySlug : '';
-  const { result, loading, error }: ResponseType = UseGetCategoryProduct(categorySlug);
+  const { result, loading }: ResponseType = UseGetCategoryProduct(categorySlug);
  
 
   const [filterOrigin, setFilterOrigin] = useState('')
