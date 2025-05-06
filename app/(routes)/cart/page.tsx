@@ -6,10 +6,11 @@ import { formatPrice } from "@/lib/formatPrice";
 import CartItem from "./components/cart-item";
 import { Button } from "@/components/ui/button";
 import { pagarAction } from "@/app/actions/pagar";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Page() {
+// Este componente sí usa useSearchParams, y está envuelto en <Suspense>
+function CartPageContent() {
   const { items } = useCart();
   const prices = items.map((product) => product.price);
   const totalPrice = prices.reduce((total, price) => total + price, 0);
@@ -31,15 +32,9 @@ export default function Page() {
     if (status) setPaymentStatus(status);
   }, [searchParams]);
 
-
-
-
-
-
   return (
     <div className="mas-w-6xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-
-    {paymentStatus === "success" && (
+      {paymentStatus === "success" && (
         <div className="mb-4 p-4 bg-green-100 text-green-800 rounded-xl">
           ✅ ¡Gracias por tu compra! El pago fue aprobado.
         </div>
@@ -50,7 +45,6 @@ export default function Page() {
           ❌ El pago fue rechazado o cancelado. Intentalo nuevamente.
         </div>
       )}
-
 
       <h1 className="mb-5 text-3xl font-bold">ShoppingCart</h1>
       <div className="grid sm:grid-cols-2 sm:gap-5">
@@ -65,7 +59,7 @@ export default function Page() {
 
         <div className="max-w-xl">
           <div className="p-6 rounded-lg bg-slate-100">
-            <p className="mb-3 text-lg font-bold">order sumary</p>
+            <p className="mb-3 text-lg font-bold">order summary</p>
             <Separator />
             <div className="flex justify-between gap-5 my-4">
               <p>order total</p>
@@ -81,5 +75,14 @@ export default function Page() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Este es el componente por default, que envuelve el otro en Suspense
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="p-10">Cargando carrito...</div>}>
+      <CartPageContent />
+    </Suspense>
   );
 }
