@@ -6,7 +6,6 @@ import { formatPrice } from "@/lib/formatPrice";
 import { useRouter } from "next/navigation";
 import ProductTasteOrigin from "@/components/shared/product-taste-origin";
 import { useCart } from "@/hooks/use-cart";
-import Image from "next/image";
 
 type ProductCardProps = {
   product: ProductType;
